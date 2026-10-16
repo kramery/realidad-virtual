@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Escena 2 - a-videosphere</title>
+    <!-- Cargo la misma versión de A-Frame que usa el tutorial -->
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+    <script>
+      // Creo un componente para pausar o reanudar el vídeo al hacer clic en un objeto
+      AFRAME.registerComponent('control-video', {
+        schema: { type: 'selector' },
+        init: function () {
+          var video = this.data;
+          this.el.addEventListener('click', function () {
+            // Si el vídeo está parado lo reproduzco y si no lo pauso
+            if (video.paused) { video.play(); } else { video.pause(); }
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Pongo un botón para el sonido porque el navegador solo deja empezar el vídeo en silencio -->
+    <button id="sonido" type="button" style="position: fixed; top: 10px; left: 10px; z-index: 10;">Activar sonido</button>
+
+    <a-scene>
+      <!-- Cargo la textura del cubo y el vídeo, que se reproduce solo y en bucle -->
+      <a-assets>
+        <img id="texturaOxid" src="oxid.png">
+        <video id="videoEsqueletos" autoplay loop="true" muted playsinline src="spooky-scary-skeletons.mp4"></video>
+      </a-assets>
+
+      <!-- Pongo el vídeo de fondo envolviendo toda la escena -->
+      <a-videosphere src="#videoEsqueletos" rotation="0 -90 0"></a-videosphere>
+
+      <!-- Creo un cubo naranja que uso como botón de play y pausa -->
+      <a-box position="0 -0.6 -3" scale="0.6 0.6 0.6" color="#ff7a00" control-video="#videoEsqueletos">
+        <a-animation attribute="rotation" dur="5000" easing="linear" repeat="indefinite" to="0 360 0"></a-animation>
+        <a-animation attribute="scale" begin="mouseenter" dur="250" to="0.8 0.8 0.8"></a-animation>
+        <a-animation attribute="scale" begin="mouseleave" dur="250" to="0.6 0.6 0.6"></a-animation>
+      </a-box>
+
+      <!-- Hago que cuatro cubos den vueltas a mi alrededor mientras saltan -->
+      <a-entity position="0 0 0">
+        <a-animation attribute="rotation" dur="16000" easing="linear" repeat="indefinite" to="0 360 0"></a-animation>
+        <a-box position="0 1 -6" rotation="0 30 45" src="#texturaOxid">
+          <a-animation attribute="position" direction="alternate" dur="1000" repeat="indefinite" to="0 2 -6"></a-animation>
+        </a-box>
+        <a-box position="6 1 0" rotation="0 30 45" src="#texturaOxid">
+          <a-animation attribute="position" direction="alternate" dur="1000" delay="250" repeat="indefinite" to="6 2 0"></a-animation>
+        </a-box>
+        <a-box position="0 1 6" rotation="0 30 45" src="#texturaOxid">
+          <a-animation attribute="position" direction="alternate" dur="1000" delay="500" repeat="indefinite" to="0 2 6"></a-animation>
+        </a-box>
+        <a-box position="-6 1 0" rotation="0 30 45" src="#texturaOxid">
+          <a-animation attribute="position" direction="alternate" dur="1000" delay="750" repeat="indefinite" to="-6 2 0"></a-animation>
+        </a-box>
+      </a-entity>
+
+      <!-- Reutilizo el cubo del tutorial: se mueve y gira cuando lo miro -->
+      <a-box position="-8 1 -2" rotation="0 30 45" scale="2 2 2" src="#texturaOxid">
+        <a-animation attribute="position" direction="alternate" dur="2000" repeat="indefinite" to="-8 1 -3"></a-animation>
+        <a-animation attribute="rotation" begin="mouseenter" dur="300" to="360 45 45"></a-animation>
+      </a-box>
+
+      <!-- Añado la cámara con un cursor para interactuar con la mirada -->
+      <a-camera>
+        <a-cursor color="#ff66ff"></a-cursor>
+      </a-camera>
+    </a-scene>
+
+    <script>
+      var boton = document.getElementById('sonido');
+      var escena = document.querySelector('a-scene');
+
+      // Cuando la escena termina de cargar silencio el vídeo y lo arranco yo para que el navegador no lo bloquee
+      escena.addEventListener('loaded', function () {
+        var video = document.getElementById('videoEsqueletos');
+        video.muted = true;
+        video.play();
+      });
+
+      // Al pulsar el botón quito o pongo el silencio y cambio el texto
+      boton.addEventListener('click', function () {
+        var video = document.getElementById('videoEsqueletos');
+        video.muted = !video.muted;
+        video.play();
+        boton.textContent = video.muted ? 'Activar sonido' : 'Silenciar';
+      });
+    </script>
+  </body>
+</html>

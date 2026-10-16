@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Escena 1 - a-sky</title>
+    <!-- Cargo la misma versión de A-Frame que usa el tutorial -->
+    <script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Cargo la textura del cubo y la imagen panorámica -->
+      <a-assets>
+        <img id="texturaOxid" src="oxid.png">
+        <img id="panoramica" src="image360.png">
+      </a-assets>
+
+      <!-- Pongo la imagen 360º de fondo dentro de una esfera de radio 10 -->
+      <a-sky id="image-360" radius="10" src="#panoramica"></a-sky>
+
+      <!-- Creo un pedestal en el centro -->
+      <a-cylinder position="0 -1.5 -5" radius="1.2" height="0.6" color="#3b2a20"></a-cylinder>
+
+      <!-- Pongo encima un cubo que gira, flota y se agranda cuando lo miro -->
+      <a-box position="0 0 -5" scale="1.2 1.2 1.2" src="#texturaOxid">
+        <a-animation attribute="rotation" dur="8000" easing="linear" repeat="indefinite" to="0 360 0"></a-animation>
+        <a-animation attribute="position" direction="alternate" dur="1800" easing="ease-in-out" repeat="indefinite" to="0 0.6 -5"></a-animation>
+        <a-animation attribute="scale" begin="mouseenter" dur="300" to="1.6 1.6 1.6"></a-animation>
+        <a-animation attribute="scale" begin="mouseleave" dur="300" to="1.2 1.2 1.2"></a-animation>
+      </a-box>
+
+      <!-- Hago que cuatro esferas naranjas giren alrededor del pedestal -->
+      <a-entity position="0 0.3 -5">
+        <a-animation attribute="rotation" dur="12000" easing="linear" repeat="indefinite" to="0 360 0"></a-animation>
+        <a-sphere position="2.2 0 0" radius="0.3" color="#ff7a00"></a-sphere>
+        <a-sphere position="-2.2 0 0" radius="0.3" color="#ff7a00"></a-sphere>
+        <a-sphere position="0 0 2.2" radius="0.3" color="#ffb347"></a-sphere>
+        <a-sphere position="0 0 -2.2" radius="0.3" color="#ffb347"></a-sphere>
+      </a-entity>
+
+      <!-- Reutilizo el cubo del tutorial: se mueve y da una vuelta cuando lo miro -->
+      <a-box position="-7 1 -2" rotation="0 30 45" scale="1.5 1.5 1.5" src="#texturaOxid">
+        <a-animation attribute="position" direction="alternate" dur="2000" repeat="indefinite" to="-7 1 -3"></a-animation>
+        <a-animation attribute="rotation" begin="mouseenter" dur="600" to="360 30 45"></a-animation>
+      </a-box>
+
+      <!-- Monto una torre de tres cubos a la derecha -->
+      <a-entity position="6 -1 -3" rotation="0 -40 0">
+        <a-box position="0 0 0" src="#texturaOxid"></a-box>
+        <a-box position="0 1 0" scale="0.8 0.8 0.8" src="#texturaOxid"></a-box>
+        <!-- El cubo de arriba gira y cambia de color cuando hago clic -->
+        <a-box position="0 1.8 0" scale="0.6 0.6 0.6" color="#8a2be2">
+          <a-animation attribute="material.color" begin="click" dur="500" direction="alternate" repeat="1" to="#39ff14"></a-animation>
+          <a-animation attribute="rotation" dur="4000" easing="linear" repeat="indefinite" to="0 360 0"></a-animation>
+        </a-box>
+      </a-entity>
+
+      <!-- Pongo una luna detrás que se hace grande y pequeña -->
+      <a-sphere position="0 4 7" radius="0.8" color="#f5f3ce">
+        <a-animation attribute="scale" direction="alternate" dur="2500" easing="ease-in-out" repeat="indefinite" to="1.15 1.15 1.15"></a-animation>
+      </a-sphere>
+
+      <!-- Añado la cámara con un cursor para interactuar con la mirada -->
+      <a-camera>
+        <a-cursor color="#FF66FF"></a-cursor>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
