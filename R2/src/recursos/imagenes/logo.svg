@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200" role="img" aria-labelledby="t">
+  <title id="t">HealthySmile Lab · Edición Halloween</title>
+  <defs>
+    <radialGradient id="cal" cx="45%" cy="40%" r="65%">
+      <stop offset="0" stop-color="#ffab5e"/>
+      <stop offset=".6" stop-color="#ff7518"/>
+      <stop offset="1" stop-color="#c24f05"/>
+    </radialGradient>
+    <radialGradient id="luz" cx="50%" cy="60%" r="60%">
+      <stop offset="0" stop-color="#fff3a8"/>
+      <stop offset="1" stop-color="#ffb100"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Calabaza con una sonrisa de dientes relucientes -->
+  <g transform="translate(18 14)">
+    <path d="M86 28c2-16 14-24 26-20-8 4-12 10-12 22z" fill="#4f7a28"/>
+    <path d="M100 18c14-10 30-6 34 4-12-2-22 0-30 6z" fill="#6aa336"/>
+    <ellipse cx="58" cy="100" rx="52" ry="68" fill="url(#cal)" stroke="#8a3200" stroke-width="4"/>
+    <ellipse cx="128" cy="100" rx="52" ry="68" fill="url(#cal)" stroke="#8a3200" stroke-width="4"/>
+    <ellipse cx="93" cy="100" rx="52" ry="74" fill="url(#cal)" stroke="#8a3200" stroke-width="4"/>
+    <!-- ojos -->
+    <path d="M52 86l18-26 16 26z" fill="url(#luz)" stroke="#2a1203" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M100 86l16-26 18 26z" fill="url(#luz)" stroke="#2a1203" stroke-width="4" stroke-linejoin="round"/>
+    <!-- boca con dientes blancos -->
+    <path d="M38 110q55 52 110 0q-10 40-55 40t-55-40z" fill="#2a1203"/>
+    <path d="M58 122h14v14q-7 4-14-2zM76 126h14v16h-14zM94 126h14v16h-14zM112 122h14v12q-7 6-14 2z" fill="#fffdf5"/>
+    <!-- destello de limpieza -->
+    <path d="M160 40l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="#fff"/>
+  </g>
+
+  <!-- Texto -->
+  <g font-family="'Arial Rounded MT Bold','Nunito','Trebuchet MS',Arial,sans-serif" font-weight="900">
+    <text x="222" y="92" font-size="50" fill="#f4f1e8" stroke="#120a1f" stroke-width="2" paint-order="stroke">Healthy</text>
+    <text x="222" y="142" font-size="50" fill="#ff7518" stroke="#120a1f" stroke-width="2" paint-order="stroke">Smile</text>
+    <text x="370" y="142" font-size="30" fill="#8dff6b" letter-spacing="3">LAB</text>
+    <rect x="222" y="158" width="250" height="28" rx="14" fill="#6b2fa3"/>
+    <text x="347" y="178" font-size="16" fill="#ffd23f" text-anchor="middle" letter-spacing="2">EDICIÓN HALLOWEEN</text>
+  </g>
+</svg>

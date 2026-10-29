@@ -1,0 +1,197 @@
+/* guardo las tipografías en el proyecto y con @font-face le digo al navegador cómo se llaman y dónde están [R12] */
+@font-face {
+  font-family: 'Creepster';
+  src: url('recursos/fuentes/Creepster-Regular.ttf');
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('recursos/fuentes/Nunito-VariableFont_wght.ttf');
+  font-weight: 200 1000;   /* este archivo trae todos los grosores, del más fino al más grueso */
+}
+
+/* guardo los colores de Halloween con nombre para reutilizarlos con var(--calabaza) [R17] */
+:root {
+  --noche: #120a1f;
+  --morado: #6b2fa3;
+  --calabaza: #ff7518;
+  --caramelo: #ffd23f;
+  --baba: #8dff6b;
+  --hueso: #f4f1e8;
+}
+
+/* quito márgenes y barras de desplazamiento para que el lienzo ocupe toda la pantalla */
+html, body {
+  margin: 0;
+  overflow: hidden;
+  background: var(--noche);
+  color: var(--hueso);
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.2vh;   /* uso vh para que todo se vea proporcionado en una pantalla de 1080p */
+}
+
+/* dejo el lienzo de p5 fijo y al fondo, con z-index bajo va detrás de todo */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* pongo el marcador del juego por encima del lienzo */
+#hud {
+  position: relative;
+  z-index: 10;
+}
+
+/* paneles de inicio y final, una caja centrada con fondo morado y borde naranja [R13] */
+.panel {
+  position: fixed;
+  z-index: 10;                        /* por encima del lienzo */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);   /* así lo centro del todo */
+  width: 90vh;
+  padding: 3vh 5vh;
+  text-align: center;
+  background: rgba(43, 19, 66, 0.92);
+  border: 0.4vh solid var(--calabaza);
+  border-radius: 4vh;
+  box-shadow: 0 0 6vh rgba(255, 117, 24, 0.5);   /* resplandor naranja */
+}
+
+/* tamaño del logo en la pantalla de inicio */
+.logo {
+  height: 14vh;
+}
+
+/* los títulos van con la letra de Halloween */
+h1, h2 {
+  margin: 1vh 0;
+  font-family: 'Creepster', cursive;
+  font-weight: normal;
+  color: var(--caramelo);
+  text-shadow: 0 0 3vh var(--calabaza);
+}
+h1 { font-size: 8vh; }
+h2 { font-size: 7vh; }
+
+/* texto de instrucciones un poco más grande */
+.instrucciones {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+/* la nota de la cámara, pequeña y discreta */
+.nota {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* al slider le quito el aspecto por defecto y le pongo una barra de morado a naranja [R13] */
+.deslizador {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 70%;
+  height: 1.5vh;
+  margin-bottom: 3vh;
+  border-radius: 1vh;
+  background: linear-gradient(90deg, var(--morado), var(--calabaza));
+  cursor: pointer;
+}
+/* el botoncito del slider es redondo y naranja como una calabaza */
+.deslizador::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 4vh;
+  height: 4vh;
+  border-radius: 50%;
+  background: var(--calabaza);
+  border: 0.4vh solid #2a1203;
+}
+
+/* botón mágico de inicio y de ¡Otra vez!, grande, naranja y con la letra de Halloween [R13] */
+.boton-magico {
+  font-family: 'Creepster', cursive;
+  font-size: 5vh;
+  padding: 1.5vh 6vh;
+  color: #2a1203;
+  background: linear-gradient(180deg, #ffb066, var(--calabaza));
+  border: 0.4vh solid var(--caramelo);
+  border-radius: 999px;
+  box-shadow: 0 0 4vh rgba(255, 117, 24, 0.7);
+  cursor: pointer;
+  animation: latido 1.5s ease-in-out infinite;   /* late sin parar con la animación de abajo */
+}
+/* al pasar el ratón deja de latir y se inclina un poco */
+.boton-magico:hover {
+  animation: none;
+  transform: scale(1.08) rotate(-2deg);
+}
+
+/* animación latido, el botón crece un poco y vuelve a su tamaño */
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+/* marcador del juego, una franja arriba con el logo y la barra */
+.marcador {
+  position: fixed;
+  top: 2vh;
+  left: 2vh;
+  right: 2vh;
+  display: flex;             /* pongo el logo y la barra uno al lado del otro */
+  align-items: center;
+  gap: 3vh;
+  padding: 1vh 3vh;
+  background: rgba(18, 10, 31, 0.75);
+  border-radius: 3vh;
+}
+.logo-pequeno { height: 7vh; }
+.progreso { flex: 1; }       /* la barra ocupa todo el espacio que sobra */
+.etiqueta { margin: 0 0 1vh; font-weight: 900; }
+#porcentaje { color: var(--caramelo); }
+
+/* la barra es un hueco gris con un relleno de colores que se va alargando */
+.barra {
+  height: 3vh;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2vh;
+  overflow: hidden;
+}
+#barra-relleno {
+  width: 0%;  /* este valor lo cambio desde sketch.js */
+  height: 100%;
+  background: linear-gradient(90deg, var(--baba), var(--caramelo));
+  transition: width 0.2s;   /* así crece suave y no a saltos */
+}
+
+/* nombre del nivel de magia, centrado arriba */
+#nivel {
+  position: fixed;
+  top: 13vh;
+  width: 100%;
+  text-align: center;
+  font-family: 'Creepster', cursive;
+  font-size: 5vh;
+  text-shadow: 0 0 2vh #000;
+}
+
+/* mensaje de instrucciones, centrado abajo */
+#mensaje {
+  position: fixed;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1.5vh 4vh;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--calabaza);
+  background: rgba(18, 10, 31, 0.85);
+  border: 0.3vh solid var(--calabaza);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* textos de la pantalla final */
+.resumen { font-size: 1.4rem; }
+.consejo { color: var(--baba); }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+  He llamado a este proyecto el cepillado embrujado.
+
+  Aquí hay tres cosas:
+    1) las librerías,
+    2) el archivo de los estilos,
+    3) las partes de la pantalla que ya escribo en HTML .
+
+  La pantalla de inicio no está aquí, si no la crea p5.js desde sketch.js con createElement, createButton y createSlider.
+
+  Tmbn lLas etiquetas R1, R2... de los comentarios donde indico de dónde sale cada parte. La lista completa la he creado en Documentación.md.
+
+-->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El Cepillado Embrujado - HealthySmile Lab</title>
+
+  <!-- Icono de la pestaña-->
+  <link rel="icon" href="recursos/imagenes/logo.svg">
+
+  <!-- Los estilos en un archivo aparte [R17] -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- p5.js versión 2, la versión que usan los ejemplos de ml5 para p5.js 2.x [R20]. p5.sound, la librería de sonido de p5. Para p5.js 2 se usa esta versión nueva, con el enlace que da la página de descarga de p5.js [R14]. -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@2.0.3/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5.sound@0.4.1/dist/p5.sound.min.js"></script>
+
+  <!-- ml5.js versión 1 para el detector de caras faceMesh [R18] [R20] -->
+  <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
+</head>
+<body>
+
+  <!-- Hueco para el lienzo de p5. Lo pongo al incio así ya que lo que va después en la página (marcador, pantalla final) se dibuja por encima. En sketch.js está createCanvas(...).parent('escenario') [R3] y [R2] -->
+  <main id="escenario"></main>
+
+  <!-- marcador del juego, que empieza oculto con display:none. Desde sketch.js lo busco con select() [R7] y lo muestro con show() [R2]. -->
+  <div id="hud" style="display: none;">
+    <div class="marcador">
+      <img src="recursos/imagenes/logo.svg" class="logo-pequeno" alt="HealthySmile Lab">
+      <div class="progreso">
+        <p class="etiqueta">Dientes relucientes: <span id="porcentaje">0%</span></p>
+        <!-- Barra, la caja de fuera es el hueco, la de dentro se va llenando -->
+        <div class="barra"><div id="barra-relleno"></div></div>
+      </div>
+    </div>
+    <p id="nivel">Espuma de baba</p>
+    <p id="mensaje">¡Abre la boca bien grande!</p>
+  </div>
+
+  <!-- Pantalla final, también oculta) -->
+  <div id="final" class="panel" style="display: none;">
+    <h2>¡Sonrisa monstruosa!</h2>
+    <p class="resumen">Has derrotado a todos los bichos de caries</p>
+    <p>Has estado con la boca abierta <strong id="fin-racha">0</strong> segundos</p>
+    <p class="consejo">En casa, cepíllate dos veces al día durante dos minutos...<br>¡sobre todo después de los caramelos!</p>
+    <!-- Aquí dentro p5.js pondrá el botón ¡Otra vez! -->
+    <div id="hueco-boton-final"></div>
+  </div>
+
+  <!-- Primero la "plantilla" de partícula y después el programa principal. -->
+  <script src="particula.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>

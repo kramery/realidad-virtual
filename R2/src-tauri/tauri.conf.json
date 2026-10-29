@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Cepillado Embrujado",
+  "version": "1.0.0",
+  "identifier": "es.healthysmile.cepillado-embrujado",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "El Cepillado Embrujado",
+        "width": 1920,
+        "height": 1080,
+        "fullscreen": true,
+        "decorations": false,
+        "resizable": false,
+        "alwaysOnTop": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "../src/recursos/iconos/32x32.png",
+      "../src/recursos/iconos/128x128.png",
+      "../src/recursos/iconos/128x128@2x.png",
+      "../src/recursos/iconos/icon.icns",
+      "../src/recursos/iconos/icon.ico"
+    ]
+  }
+}
