@@ -1,10 +1,10 @@
 # El Cepillado Embrujado — Documentación
 
-**Cliente:** HealthySmile Lab, **Temática:** Halloween, **Tecnologías:** p5.js 2, p5.sound, ml5.js 1 (faceMesh), Tauri 2
-
 El boceto de paleta, tipografía y flujo de pantallas está en [docs/Boceto.pdf](docs/Boceto.pdf), y la versión editable en `docs/Boceto editable.pptx`.
 
 Enlace a Github: https://github.com/kramery/realidad-virtual/tree/main/R2
+
+Enlace a Folio: https://jzamorajim.folio.uoc.edu/2026/10/29/r2-realidad-virtual/
 
 ## 1. La idea
 
