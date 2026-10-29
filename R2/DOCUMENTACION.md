@@ -4,7 +4,7 @@
 
 El boceto de paleta, tipografía y flujo de pantallas está en [docs/Boceto.pdf](docs/Boceto.pdf), y la versión editable en `docs/Boceto editable.pptx`.
 
----
+Enlace a Github: https://github.com/kramery/realidad-virtual/tree/main/R2
 
 ## 1. La idea
 
